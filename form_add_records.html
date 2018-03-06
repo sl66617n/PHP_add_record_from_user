@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Add Record Form</title>
+</head>
+<body>
+<form method="GET">
+    <p>
+        <label for="firstName">First Name:</label>
+        <input type="text" name="firstname" id="firstName">
+    </p>
+    <p>
+        <label for="lastName">Last Name:</label>
+        <input type="text" name="lastname" id="lastName">
+    </p>
+    <p>
+        <label for="gender">Gender:</label>
+        <input type="text" name="gender" id="gender">
+    </p>
+    <p>
+        <label for="ipAddress">ip Address:</label>
+        <input type="text" name="ip" id="ipAddress">
+    </p>    
+    <input type="submit" value="Submit" onclick="addtoDB()">
+</form>
+<p id=”submitted></p>
+
+<script>
+function addtoDB() {
+  var xhttp; 
+  xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (xhttp.readyState == 4 && xhttp.status == 200) {
+        document.getElementById("submitted").innerHTML = "form submitted";
+    }
+  };
+  var first_name = document.getElementById('firstName').value;
+   var last_name = document.getElementById('lastName').value;
+   var gender = document.getElementById('gender').value;
+   var ip  = document.getElementById('ipAddress').value;
+   var queryString = "?firstname=" + first_name +  "&lastname=" + last_name + "&gender=" + gender + "&ip=" + ip;
+   <!-- ?firstname=fsggdffgsf&lastname=shnbvgyujkmnjk&gender=female&ip=9876567876567 -->
+   console.log(queryString);
+   xhttp.open("GET", "insert.php" + queryString, true);
+   xhttp.send(null); 
+
+}
+</script>
